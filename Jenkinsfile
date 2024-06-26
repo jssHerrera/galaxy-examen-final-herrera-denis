@@ -46,12 +46,12 @@ pipeline {
             }
             stage('Build Image') {
                 steps {
-                    copyArtifacts filter: 'target/labmaven-*.jar',
+                    copyArtifacts filter: 'build/libs/labmaven-*-SNAPSHOT.jar',
                                     fingerprintArtifacts: true,
                                     projectName: '${JOB_NAME}',
                                     flatten: true,
                                     selector: specific('${BUILD_NUMBER}'),
-                                    target: 'target';
+                                    target: 'build/libs/'
                     sh 'docker --version'
                     sh 'docker-compose --version'
                     sh 'docker-compose build'
