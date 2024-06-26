@@ -9,11 +9,11 @@ pipeline {
                 docker { image 'maven:3.6.3-openjdk-11-slim' }
             }
             steps {
-                sh 'gradle build'
+                sh 'mvn package'
             }
             post{
                 success {
-                    archiveArtifacts artifacts: 'target/*.jar', fingerprint: true, onlyIfSuccessful: true
+                    archiveArtifacts artifacts: 'target/labmaven-*.jar', fingerprint: true, onlyIfSuccessful: true
                 }
             }
         }
